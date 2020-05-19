@@ -1,0 +1,9 @@
+<AssignMessage name="AM.SetPingResponse" enabled="true">
+	<Set>
+		<Payload contentType="application/json">{"success": true}</Payload>
+	</Set>
+	<AssignVariable>
+		<Name>flow.skipTarget</Name>
+		<Value>true</Value>
+	</AssignVariable>
+</AssignMessage>

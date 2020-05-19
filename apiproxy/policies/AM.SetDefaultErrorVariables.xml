@@ -1,0 +1,22 @@
+<AssignMessage name="AM.SetDefaultErrorVariables" enabled="true">
+    <AssignVariable>
+        <Name>flow.error.code</Name>
+        <Value>500.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.message</Name>
+        <Value>internal server error</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.info</Name>
+        <Value>https://developers.TODO.com/path/to/api/docs/and/error-codes/500.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.status</Name>
+        <Value>500</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.reason</Name>
+        <Value>Internal Server Error</Value>
+    </AssignVariable>
+</AssignMessage>

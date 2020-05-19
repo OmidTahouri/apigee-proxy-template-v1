@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+
+    <FaultRules>
+
+        <FaultRule name="spike-arrest-violation">
+            <Condition>fault.name = "SpikeArrestViolation"</Condition>
+            <Step>
+                <Name>AM.SetSpikeArrestViolationErrorVariables</Name>
+            </Step>
+        </FaultRule>
+
+        <FaultRule name="regex-protection-violation">
+            <Condition>fault.name = "ThreatDetected"</Condition>
+            <Step>
+                <Name>AM.SetRegExProtectionViolationErrorVariables</Name>
+            </Step>
+        </FaultRule>
+
+        <FaultRule name="quota-violation">
+            <Condition>fault.name = "QuotaViolation"</Condition>
+            <Step>
+                <Name>AM.SetQuotaViolationErrorVariables</Name>
+            </Step>
+        </FaultRule>
+
+    </FaultRules>
+
+    <DefaultFaultRule name="all">
+        <AlwaysEnforce>true</AlwaysEnforce>
+        <Step>
+            <Condition>flow.error.code = null</Condition>
+            <Name>AM.SetDefaultErrorVariables</Name>
+        </Step>
+        <Step>
+            <Name>FC.SetCORSHeaders</Name>
+        </Step>
+        <Step>
+            <Condition>fault.name = "SpikeArrestViolation" OR fault.name = "ThreatDetected" OR fault.name = "QuotaViolation"</Condition>
+            <Name>AM.SetFaultResponse</Name>
+        </Step>
+    </DefaultFaultRule>
+
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Condition>(request.verb != "OPTIONS" AND (proxy.pathsuffix != "/health" OR request.verb != "GET") AND (proxy.pathsuffix != "/ping" OR request.verb != "GET")</Condition>
+                <FaultRules/>
+                <Name>FC.TokenValidation</Name>
+            </Step>
+            <Step>
+                <FaultRules/>
+                <Name>CheckQuota</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+
+    <Flows>
+        <Flow name="preflight-request">
+            <Condition>request.verb = "OPTIONS"</Condition>
+            <Request>
+                <Step>
+                    <Name>AM.SkipTarget</Name>
+                </Step>
+            </Request>
+        </Flow>
+
+        <Flow name="monitoring-ping">
+            <Condition>request.verb = "GET" AND proxy.pathsuffix = "/ping"</Condition>
+            <Request>
+                <Step>
+                    <Name>AM.SetPingResponse</Name>
+                </Step>
+            </Request>
+        </Flow>
+
+        <Flow name="monitoring-status">
+            <Condition>request.verb = "GET" AND proxy.pathsuffix = "/health"</Condition>
+            <Response>
+                <Step>
+                    <Name>AM.SetStatusResponse</Name>
+                </Step>
+            </Response>
+        </Flow>
+
+        <Flow name="validate-verb-n-uri">
+            <Description>Validate the allowed URI and HTTP Verbs</Description>
+            <Condition>false</Condition>
+            <Request>
+                <Step>
+                    <Name>RF.MethodsURINotAllowed</Name>
+                </Step>
+            </Request>
+            <Response/>
+        </Flow>
+
+
+    </Flows>
+
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>FC.SetCORSHeaders</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+
+    <PostClientFlow>
+        <Request/>
+        <Response>
+            <Step>
+                <Name>FC.MessageLogging</Name>
+            </Step>
+        </Response>
+    </PostClientFlow>
+
+    <HTTPProxyConnection>
+        <BasePath>@basepath</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+
+    <RouteRule name="default">
+        <Condition>flow.skipTarget != true</Condition>
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+
+    <RouteRule name="no-route"/>
+
+</ProxyEndpoint>

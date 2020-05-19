@@ -1,0 +1,22 @@
+<AssignMessage name="AM.SetSpikeArrestViolationErrorVariables" enabled="true">
+    <AssignVariable>
+        <Name>flow.error.code</Name>
+        <Value>429.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.message</Name>
+        <Value>rate limit violation</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.info</Name>
+        <Value>https://developers.TODO.com/path/to/api/docs/and/error-codes/429.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.status</Name>
+        <Value>429</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.reason</Name>
+        <Value>Too Many Requests</Value>
+    </AssignVariable>
+</AssignMessage>

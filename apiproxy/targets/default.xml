@@ -1,0 +1,22 @@
+<TargetEndpoint name="default">
+    <FaultRules></FaultRules>
+    <PreFlow name="PreFlow">
+        <Request></Request>
+        <Response></Response>
+    </PreFlow>
+    <Flows></Flows>
+    <PostFlow name="PostFlow">
+        <Request>
+            <Step>
+                <Name>FC.SetCommonHeaders</Name>
+            </Step>
+        </Request>
+        <Response></Response>
+    </PostFlow>
+    <HTTPTargetConnection>
+        <LoadBalancer>
+            <Server name="@targetserver"></Server>
+        </LoadBalancer>
+        <Path>@targetpath</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>

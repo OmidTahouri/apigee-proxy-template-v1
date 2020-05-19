@@ -1,0 +1,3 @@
+<FlowCallout async="false" continueOnError="false" enabled="true" name="FC.SetCORSHeaders">
+    <SharedFlowBundle>common-cors-support-v1</SharedFlowBundle>
+</FlowCallout>

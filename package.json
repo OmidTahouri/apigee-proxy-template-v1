@@ -1,0 +1,22 @@
+{
+  "name": "proxy-template-v1",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "deploy": "mvn etc.",
+    "test-int": "npx cucumber-js test",
+    "test-unit": "npx cucumber-js test",
+    "validate": "",
+    "postinstall": ""
+  },
+  "author": "",
+  "license": "NONE",
+  "dependencies": {
+    "apickli": "^2.3.1",
+    "apigeetool": "^0.14.2",
+    "cucumber": "^5.1.0"
+  }
+}

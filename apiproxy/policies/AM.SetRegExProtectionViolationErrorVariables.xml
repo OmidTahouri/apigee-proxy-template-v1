@@ -1,0 +1,22 @@
+<AssignMessage name="AM.SetRegExProtectionViolationErrorVariables" enabled="true">
+    <AssignVariable>
+        <Name>flow.error.code</Name>
+        <Value>403.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.message</Name>
+        <Value>threat detected; security policy violated</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.info</Name>
+        <Value>https://developers.TODO.com/path/to/api/docs/and/error-codes/403.00.001</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.status</Name>
+        <Value>403</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.error.reason</Name>
+        <Value>Forbidden</Value>
+    </AssignVariable>
+</AssignMessage>

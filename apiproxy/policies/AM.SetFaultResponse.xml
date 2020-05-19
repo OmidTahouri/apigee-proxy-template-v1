@@ -1,0 +1,8 @@
+<AssignMessage name="AM.SetFaultResponse" enabled="true">
+    <Set>
+        <Payload contentType="application/json" variablePrefix="@" variableSuffix="#">{ "code": "@flow.error.code#", "message": "@flow.error.message#", "info": "@flow.error.info#" }</Payload>
+        <StatusCode>{flow.error.status}</StatusCode>
+        <ReasonPhrase>{flow.error.reason}</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

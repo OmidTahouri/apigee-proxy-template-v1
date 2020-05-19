@@ -1,0 +1,6 @@
+<AssignMessage name="AM.SkipTarget" enabled="true">
+	<AssignVariable>
+		<Name>flow.skipTarget</Name>
+		<Value>true</Value>
+	</AssignVariable>
+</AssignMessage>
